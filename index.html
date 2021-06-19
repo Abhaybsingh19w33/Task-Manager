@@ -68,5 +68,54 @@
                 </div>
             </div>
         </nav>
+        <!-- container - add container -->
+        <div class="container">
+            <!-- mt-4 - add 4 margin from top -->
+            <!-- adding a search bar -->
+            <section class="mt-4">
+                <!-- row - adding row -->
+                <!-- justify-content-center - aligning content in center -->
+                <div class="row justify-content-center">
+                    <!-- col-md-6  - take 6 row in medium-->
+                    <div class="col-md-6">
+                        <!-- input-group - Easily extend form controls by 
+                            adding text, buttons, or button groups on either 
+                            side of textual inputs, custom selects, and 
+                            custom file inputs -->
+                        <!-- flex-nowrap - hange how flex items wrap in a 
+                            flex container. Choose from no wrapping at all 
+                            (the browser default) with .flex-nowrap,  -->
+                        <!-- shadow-lg - adding large shadow -->
+                        <div class="input-group flex-nowrap shadow-lg">
+                            <!-- form-control - Give textual form controls 
+                                like <input>s and <textarea>s an upgrade 
+                                with custom styles, sizing, focus states, 
+                                and more. -->
+                            <input
+                                type="search"
+                                class="form-control"
+                                placeholder="Search Task"
+                                aria-label="Search Task"
+                                aria-describedby="addon-wrapping"
+                                onchange="searchTask.apply(this, arguments)"
+                            >
+                            <!-- input-group-text - Easily extend form controls 
+                                by adding text, buttons, or button groups on either 
+                                side of textual inputs, custom selects, and custom 
+                                file inputs. -->
+                            <span class="input-group-text" id="addon-wrapping">
+                                <!-- search button -->
+                                <i class="fas fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- mt-4 - add 4 margin from top -->
+            <section class="mt-4">
+                <!-- row - add a row for task__contents -->
+                <div class="row task__contents"></div>
+            </section>
+        </div>
     </body>
 </html>
