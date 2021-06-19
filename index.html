@@ -16,6 +16,15 @@
         <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet">
     </head>
     <body>
+        <!-- add new button to add tasks -->
+        <div class="add__new__btn__modile__only">
+            <!-- float-right - to float this button to right-->
+            <button class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#addNewModal">
+                <!-- plus icon -->
+                <i class="fas fa-plus mr-2"></i>
+                Add new
+            </button>
+        </div>
         <!-- navbar - this will add a navbar  -->
         <!-- navbar-expand-lg - navbar will expand only for large screens -->
         <!-- navbar-light - light theme for navbar -->
@@ -88,7 +97,7 @@
                         <!-- shadow-lg - adding large shadow -->
                         <div class="input-group flex-nowrap shadow-lg">
                             <!-- form-control - Give textual form controls 
-                                like <input>s and <textarea>s an upgrade 
+                                like input s and textarea s an upgrade 
                                 with custom styles, sizing, focus states, 
                                 and more. -->
                             <input
@@ -114,8 +123,76 @@
             <!-- mt-4 - add 4 margin from top -->
             <section class="mt-4">
                 <!-- row - add a row for task__contents -->
-                <div class="row task__contents"></div>
+                <div class="row task__contents">
+                    <!-- creating a card -->
+                    <!-- col-md-6 - card will take half of screen for medium screen devices
+                    col-lg-4 - card will take one third of screen for medium screen devices
+                    mt-3 - 3 margin from top -->
+                    <div class="col-md-6 col-lg-4 mt-3">
+                        <!-- card - this will give a card look -->
+                        <!-- shadow-sm - small shadow for the card -->
+                        <div class="card shadow-sm task__card">
+                            <!-- card-header - header of the card -->
+                            <!-- d-flex -  this will take all the space -->
+                            <!-- justify-content-end - align items to end -->
+                            <!-- task__card__header -->
+                            <div class="card-header d-flex justify-content-end task__card__header">
+                                <!-- btn-outline-info - this is some color style for button -->
+                                <!-- mr-2 - 2 margin from right -->
+                                <button type="button" class="btn btn-outline-info mr-2">
+                                    <!-- pencil icon -->
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
+                                <!--red color for the delete button -->
+                                <button type="button" class="btn btn-outline-danger">
+                                    <!-- delete button -->
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                            <!-- card-body -->
+                            <div class="card-body">
+                                <!-- some image -->
+                                <!-- card-img-top -  places an image to the top of the card -->
+                                <!-- mb-3 - 3 margin from bottom -->
+                                <!-- rounded-lg - large border radius for image -->
+                                <img
+                                    width="100%"
+                                    src="#"
+                                    alt="Card image cap"
+                                    class="card-img-top mb-3 rounded-lg"
+                                >
+                                <h4 class="task__card__title">title</h4>
+                                <!-- text-muted - color of the text will be light grey -->
+                                <p class="description trim-3-lines text-muted" data-gramm_editor="false">
+                                    description
+                                </p>
+                                <!-- tags  -->
+                                <!-- text-white - white color text -->
+                                <!-- d-flex  -->
+                                <!-- flex-wrap - wrap the button -->
+                                <div class="tags text-white d-flex flex-wrap">
+                                    <!-- badge with blue color  -->
+                                    <!-- m-1 - one margin from all sides-->
+                                    <span class="badge bg-primary m-1">type</span>
+                                </div>
+                            </div>
+                            <div class="card-footer task__card__footer">
+                                <button
+                                    type="button"
+                                    class="btn btn-outline-primary float-right"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#showTask"
+                                    onclick="openTask.apply(this, arguments)"
+                                >
+                                    Open Task
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
         </div>
+        <script src="./scripts/index.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     </body>
 </html>
