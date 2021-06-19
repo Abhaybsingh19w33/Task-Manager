@@ -25,6 +25,132 @@
                 Add new
             </button>
         </div>
+        <!-- model - Modal plugin is a dialog box/popup window that is displayed on top of the current page -->
+        <!-- fade - It will slide down and fade in from the top of the page -->
+        <!-- A tabindex="-1" value removes the element from the default navigation flow 
+            (i.e., a user cannot tab to it), but it allows it to receive programmatic 
+            focus, meaning focus can be set to it from a link or with scripting.** This
+            can be very useful for elements that should not be tabbed to, but that may 
+            need to have focus set to them. -->
+        <!-- adding new modal to add data -->
+        <div
+            class="modal fade"
+            id="addNewModal"
+            tabindex="-1"
+            aria-labelledby="addNewModalLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add New Task</h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        >
+                        <!-- cross button -->
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <!-- modal-header -->
+                    <div class="modal-body">
+                        <!-- form -->
+                        <form>
+
+                            <div class="mb-3">
+                                <!-- label for image -->
+                                <label for="imageUrl" class="form-label">Image Url</label>
+                                <!-- image url input -->
+                                <input
+                                    type="url"
+                                    class="form-control"
+                                    id="imageUrl"
+                                    placeholder="http://example.com/image.png"
+                                >
+                            </div>
+                            <!-- image url input div -->
+                            <div class="mb-3">
+                                <!-- task title label -->
+                                <label for="taskTitle" class="form-label">Task Title</label>
+                                <!-- input for task title -->
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="taskTitle"
+                                    placeholder="Learn Web Dev"
+                                    required
+                                >
+                            </div>
+                            <!-- task title div -->
+                            <div class="mb-3">
+                                <!-- task type label -->
+                                <label for="Tags" class="form-label">Task Type</label>
+                                <!-- task type input -->
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="Tags"
+                                    placeholder="Work.."
+                                    required
+                                >
+                            </div>
+                            <!-- task type div -->
+                            <div class="mb-3">
+                                <!-- task description label -->
+                                <label for="taskDescription" class="form-label">
+                                    Task Description
+                                </label>
+                                <!-- task description input -->
+                                <textarea
+                                    class="form-control"
+                                    id="taskDescription"
+                                    placeholder="http://example.com/image.png"
+                                    rows="4"
+                                    required
+                                ></textarea>
+                            </div>
+                            <!-- task description div -->
+                            <!-- close button -->
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Close
+                            </button>
+                            <!-- submit button -->
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                onclick="handlesubmit()"
+                                data-bs-dismiss="modal"
+                            >
+                                Save changes
+                            </button>
+                        </form>
+                    </div>
+                    <!-- modal body -->
+                </div>
+                <!-- modal content -->
+            </div> 
+            <!-- modal dialog -->
+        </div> <!-- modal  -->
+        <div
+            class="modal fade"
+            id="showTask"
+            tabindex="-1"
+            aria-labelledby="showTaskLabel"
+            aria-hidden="true"
+        >
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-body task__modal__body"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         <!-- navbar - this will add a navbar  -->
         <!-- navbar-expand-lg - navbar will expand only for large screens -->
         <!-- navbar-light - light theme for navbar -->
