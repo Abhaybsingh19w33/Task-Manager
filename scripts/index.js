@@ -4,7 +4,7 @@
 // parent element store cards
 const taskContainer = document.querySelector(".task__container");
 // global store
-const globalStore = [];
+let globalStore = [];
 
 const newcard = ({
     id,
@@ -19,8 +19,8 @@ const newcard = ({
                 <button type="button" class="btn btn-outline-success">
                     <i class="fas fa-pencil-alt"></i>
                 </button>
-                <button type="button" class="btn btn-outline-danger">
-                    <i class="fas fa-trash-alt"></i>
+                <button type="button" id=${id} class="btn btn-outline-danger onclick="deleteCard.apply(this,arguments)">
+                    <i class="fas fa-trash-alt" id=${id} onclick="deleteCard.apply(this,arguments)"></i>
                 </button>
             </div>
             <img src=${imageUrl} alt="Card image cap" class="card-img-top">
@@ -58,6 +58,8 @@ const loadInitialTaskCards = () => {
     });
 };
 
+const updateLocalStorage = () => localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
+
 const saveChanges = () => {
     const taskData = {
         // this function return current date
@@ -84,10 +86,44 @@ const saveChanges = () => {
     // localStorage -> interface -> programming
 
     // add to localStorage
-    localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
+    // localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }));
     // key  -> data
+    updateLocalStorage();
 };
 
+const deleteCard = (event) => {
+    // id
+    event = window.event;
+    const targetID = event.target.id;
+    const tagname = event.target.tagname;
+    // search
+    // remove the object
+    globalStore = globalStore.filter((cardObject) => cardObject.id != targetID);
+    // loop ober the new globalStore, and inject updated cards to DOM
+    // this is not working we have to remove the element from the DOM
+    // newUpdatedArray.map((cardObject) => {
+    //     const createNewCard = newcard(cardObject);
+    //     taskContainer.insertAdjacentHTML("beforeend", createNewCard);
+    // })
+    // globalStore = newUpdatedArray;
+
+    // localStorage.setItem("tasky", JSON.stringify({ cards: globalStore }))
+    updateLocalStorage();
+
+    // we have to remove the element from the DOM
+    // access the DOM
+    if (tagname === "BUTTON") {
+        // task__container
+        return taskContainer.removeChild(
+            event.target.parentNode.parentNode.parentNode // col-lg-4
+        );
+    }
+
+    // task__container
+    return taskContainer.removeChild(
+        event.target.parentNode.parentNode.parentNode.parentNode // col-lg-4
+    );
+};
 // The modal was not closing upon adding new card
 // the cards were deleted afetr refresh -> localstorage 5mb
 
