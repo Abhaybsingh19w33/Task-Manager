@@ -1,324 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Task Manager</title>
-        <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.css">
-        <link rel="stylesheet" href="./css/styles.css">
-        <link
-            rel="stylesheet"
-            href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
-            integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
-            crossorigin="anonymous"
-        >
-        <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet">
-    </head>
-    <body>
-        <!-- add new button to add tasks -->
-        <div class="add__new__btn__modile__only">
-            <!-- float-right - to float this button to right-->
-            <button class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#addNewModal">
-                <!-- plus icon -->
-                <i class="fas fa-plus mr-2"></i>
-                Add new
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet" />
+    <!-- Fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous" />
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Tasky</title>
+</head>
+
+<body onload="loadInitialTaskCards()">
+    <!-- add new button to add tasks -->
+    <!-- <div class="add__new__btn__modile__only"> -->
+    <!-- float-right - to float this button to right-->
+    <!-- <button class="btn btn-primary float-right" data-bs-toggle="modal" data-bs-target="#addNewModal"> -->
+    <!-- plus icon -->
+    <!-- <i class="fas fa-plus mr-2"></i> -->
+    <!-- Add new
             </button>
-        </div>
-        <!-- model - Modal plugin is a dialog box/popup window that is displayed on top of the current page -->
-        <!-- fade - It will slide down and fade in from the top of the page -->
-        <!-- A tabindex="-1" value removes the element from the default navigation flow 
+        </div> -->
+
+    <!-- modal  -->
+    <!-- model - Modal plugin is a dialog box/popup window that is displayed on top of the current page -->
+    <!-- fade - It will slide down and fade in from the top of the page -->
+    <!-- A tabindex="-1" value removes the element from the default navigation flow 
             (i.e., a user cannot tab to it), but it allows it to receive programmatic 
             focus, meaning focus can be set to it from a link or with scripting.** This
             can be very useful for elements that should not be tabbed to, but that may 
             need to have focus set to them. -->
-        <!-- adding new modal to add data -->
-        <div
-            class="modal fade"
-            id="addNewModal"
-            tabindex="-1"
-            aria-labelledby="addNewModalLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Add New Task</h5>
-                        <button
-                            type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                        >
+    <!-- adding new modal to add data -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Task</h5>
+                    <!-- bs is bootstrap -->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <!-- cross button -->
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                    <!-- modal-header -->
-                    <div class="modal-body">
-                        <!-- form -->
-                        <form>
-
-                            <div class="mb-3">
-                                <!-- label for image -->
-                                <label for="imageUrl" class="form-label">Image Url</label>
-                                <!-- image url input -->
-                                <input
-                                    type="url"
-                                    class="form-control"
-                                    id="imageUrl"
-                                    placeholder="http://example.com/image.png"
-                                >
-                            </div>
-                            <!-- image url input div -->
-                            <div class="mb-3">
-                                <!-- task title label -->
-                                <label for="taskTitle" class="form-label">Task Title</label>
-                                <!-- input for task title -->
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="taskTitle"
-                                    placeholder="Learn Web Dev"
-                                    required
-                                >
-                            </div>
-                            <!-- task title div -->
-                            <div class="mb-3">
-                                <!-- task type label -->
-                                <label for="Tags" class="form-label">Task Type</label>
-                                <!-- task type input -->
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    id="Tags"
-                                    placeholder="Work.."
-                                    required
-                                >
-                            </div>
-                            <!-- task type div -->
-                            <div class="mb-3">
-                                <!-- task description label -->
-                                <label for="taskDescription" class="form-label">
-                                    Task Description
-                                </label>
-                                <!-- task description input -->
-                                <textarea
-                                    class="form-control"
-                                    id="taskDescription"
-                                    placeholder="http://example.com/image.png"
-                                    rows="4"
-                                    required
-                                ></textarea>
-                            </div>
-                            <!-- task description div -->
-                            <!-- close button -->
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                Close
-                            </button>
-                            <!-- submit button -->
-                            <button
-                                type="submit"
-                                class="btn btn-primary"
-                                onclick="handlesubmit()"
-                                data-bs-dismiss="modal"
-                            >
-                                Save changes
-                            </button>
-                        </form>
-                    </div>
-                    <!-- modal body -->
+                        <!-- <i class="fas fa-times"></i> -->
+                    </button>
                 </div>
-                <!-- modal content -->
-            </div> 
-            <!-- modal dialog -->
-        </div> <!-- modal  -->
-        <div
-            class="modal fade"
-            id="showTask"
-            tabindex="-1"
-            aria-labelledby="showTaskLabel"
-            aria-hidden="true"
-        >
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-body task__modal__body"></div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Close
-                        </button>
+                <!-- modal-header -->
+                <div class="modal-body">
+                    <!-- form -->
+                    <div class="mb-3">
+                        <!-- label for image -->
+                        <label for="imageurl" class="form-label">Image Url</label>
+                        <!-- image url input -->
+                        <input type="url" class="form-control" id="imageurl"
+                            placeholder="https://images.hello.com/hello.jpg" />
+                    </div>
+                    <!-- image url input div -->
+                    <div class="mb-3">
+                        <!-- task title label -->
+                        <label for="tasktitle" class="form-label">Task Title</label>
+                        <!-- input for task title -->
+                        <input type="text" class="form-control" id="tasktitle" placeholder="API Integration" />
+                    </div> 
+                    <!-- task title div -->
+                    <div class="mb-3">
+                        <!-- task type label -->
+                        <label for="tasktype" class="form-label">Task Type</label>
+                        <!-- task type input -->
+                        <input type="text" class="form-control" id="tasktype" placeholder="development" />
+                    </div>
+                    <!-- task type div -->
+                    <div class="mb-3">
+                        <!-- task description label -->
+                        <label for="taskdescription" class="form-label">Task Description</label>
+                        <!-- task description input -->
+                        <textarea rows="6" class="form-control" id="taskdescription"
+                            placeholder="Building an amazing API!"></textarea>
                     </div>
                 </div>
+                <!-- task description div -->
+                <div class="modal-footer">
+                    <!-- close button -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                    </button>
+                    <!-- submit button -->
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="saveChanges()">
+                        Save changes
+                    </button>
+                </div>
+                <!-- modal body -->
             </div>
+            <!-- modal content -->
         </div>
-        <!-- navbar - this will add a navbar  -->
-        <!-- navbar-expand-lg - navbar will expand only for large screens -->
-        <!-- navbar-light - light theme for navbar -->
-        <!-- bg-light - light back-ground color for navabr -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <!-- container-fluid - this will expand entire space for navbar -->
-            <div class="container-fluid">
-                <!-- navbar-brand - this will add brand name or logo -->
-                <!-- font-weight-700 - bold the text logo -->
-                <h1 class="navbar-brand font-weight-700">
-                    <a href="index.html">TaskY</a>
-                </h1>
-                <!-- navbar-toggler -  for use with our collapse plugin and other navigation toggling behaviors -->
-                <!-- data-bs-toggle="collapse" - Just add data-bs-toggle="collapse" and a data-bs-target to the 
+        <!-- modal dialog -->
+    </div>
+
+
+    <!-- navbar - this will add a navbar  -->
+    <!-- navbar-expand-lg - navbar will expand only for large screens -->
+    <!-- navbar-light - light theme for navbar -->
+    <!-- bg-light - light back-ground color for navabr -->
+    <nav class="navbar navbar-expand-md navbar-light bg-light shadow-sm">
+        <!-- container-fluid - this will expand entire space for navbar -->
+        <div class="container-fluid">
+            <!-- navbar-brand - this will add brand name or logo -->
+            <!-- font-weight-700 - bold the text logo -->
+            <h1 class="navbar-brand fw-bold">
+                <a href="index.html" contenteditable="true">TaskY</a>
+            </h1>
+            <!-- navbar-toggler -  for use with our collapse plugin and other navigation toggling behaviors -->
+            <!-- data-bs-toggle="collapse" - Just add data-bs-toggle="collapse" and a data-bs-target to the 
                     element to automatically assign control of one or more collapsible elements. The data-bs-target
                     attribute accepts a CSS selector to apply the collapse to. Be sure to add the class collapse 
                     to the collapsible element. If you’d like it to default open, add the additional class show. -->
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <!-- navbar-toggler-icon - this will add a toggle button -->
-                    <span class="navbar-toggler-icon"></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <!-- navbar-toggler-icon - this will add a toggle button -->
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- collapse - JavaScript plugin is used to show and hide content -->
+            <!-- navbar-collapse - to change when their content collapses behind a button  -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- navbar-nav - for a full-height and lightweight navigation (including support for dropdowns). -->
+                <!-- me-auto - pushing two items to the right (.me-auto) -->
+                <!-- mb-2 - margin from bottom  -->
+                <!-- mb-lg-0 -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#"><strong>Home</strong></a>
+                    </li>
+                </ul>
+                <!-- ml-auto - pushing two items to the left -->
+                <!-- bs is bootstrap -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fas fa-plus"></i> Add New
                 </button>
-                <!-- collapse - JavaScript plugin is used to show and hide content -->
-                <!-- navbar-collapse - to change when their content collapses behind a button  -->
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- navbar-nav - for a full-height and lightweight navigation (including support for dropdowns). -->
-                    <!-- me-auto - pushing two items to the right (.me-auto) -->
-                    <!-- mb-2 - margin from bottom  -->
-                    <!-- mb-lg-0 -->
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="index.html">
-                                <strong>home</strong>
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- ml-auto - pushing two items to the left -->
-                    <button class="btn btn-primary ml-auto" data-bs-toggle="modal" data-bs-target="#addNewModal">
-                        <!-- mr-2 - 2 margin from right -->
-                        <i class="fas fa-plus mr-2"></i>
-                        Add new
-                    </button>
-                </div>
             </div>
-        </nav>
-        <!-- container - add container -->
-        <div class="container">
-            <!-- mt-4 - add 4 margin from top -->
-            <!-- adding a search bar -->
-            <section class="mt-4">
-                <!-- row - adding row -->
-                <!-- justify-content-center - aligning content in center -->
-                <div class="row justify-content-center">
-                    <!-- col-md-6  - take 6 row in medium-->
-                    <div class="col-md-6">
-                        <!-- input-group - Easily extend form controls by 
+        </div>
+    </nav>
+    <!-- container - add container -->
+    <div class="container">
+        <!-- Search bar -->
+        <!-- mt-5 - add 5 margin from top -->
+        <!-- adding a search bar -->
+        <section class="mt-5">
+            <!-- row - adding row -->
+            <!-- justify-content-center - aligning content in center -->
+            <div class="row justify-content-center">
+                <!-- col-md-6  - take 6 row in medium-->
+                <div class="col-md-6">
+                    <!-- input-group - Easily extend form controls by 
                             adding text, buttons, or button groups on either 
                             side of textual inputs, custom selects, and 
                             custom file inputs -->
-                        <!-- flex-nowrap - hange how flex items wrap in a 
-                            flex container. Choose from no wrapping at all 
-                            (the browser default) with .flex-nowrap,  -->
-                        <!-- shadow-lg - adding large shadow -->
-                        <div class="input-group flex-nowrap shadow-lg">
-                            <!-- form-control - Give textual form controls 
+                    <!-- shadow-lg - adding shadow -->
+                    <div class="input-group mb-3 shadow">
+                        <!-- form-control - Give textual form controls 
                                 like input s and textarea s an upgrade 
                                 with custom styles, sizing, focus states, 
                                 and more. -->
-                            <input
-                                type="search"
-                                class="form-control"
-                                placeholder="Search Task"
-                                aria-label="Search Task"
-                                aria-describedby="addon-wrapping"
-                                onchange="searchTask.apply(this, arguments)"
-                            >
-                            <!-- input-group-text - Easily extend form controls 
+                        <input type="text" class="form-control" placeholder="Search Task" aria-label="Search Task"
+                            aria-describedby="basic-addon2" />
+                        <!-- input-group-text - Easily extend form controls 
                                 by adding text, buttons, or button groups on either 
                                 side of textual inputs, custom selects, and custom 
                                 file inputs. -->
-                            <span class="input-group-text" id="addon-wrapping">
-                                <!-- search button -->
-                                <i class="fas fa-search"></i>
-                            </span>
-                        </div>
+                        <span class="input-group-text" id="basic-addon2">
+                            <!-- search button -->
+                            <i class="fas fa-search"></i>
+                        </span>
                     </div>
                 </div>
-            </section>
-            <!-- mt-4 - add 4 margin from top -->
-            <section class="mt-4">
-                <!-- row - add a row for task__contents -->
-                <div class="row task__contents">
-                    <!-- creating a card -->
-                    <!-- col-md-6 - card will take half of screen for medium screen devices
-                    col-lg-4 - card will take one third of screen for medium screen devices
-                    mt-3 - 3 margin from top -->
-                    <div class="col-md-6 col-lg-4 mt-3">
-                        <!-- card - this will give a card look -->
-                        <!-- shadow-sm - small shadow for the card -->
-                        <div class="card shadow-sm task__card">
-                            <!-- card-header - header of the card -->
-                            <!-- d-flex -  this will take all the space -->
-                            <!-- justify-content-end - align items to end -->
-                            <!-- task__card__header -->
-                            <div class="card-header d-flex justify-content-end task__card__header">
-                                <!-- btn-outline-info - this is some color style for button -->
-                                <!-- mr-2 - 2 margin from right -->
-                                <button type="button" class="btn btn-outline-info mr-2">
-                                    <!-- pencil icon -->
-                                    <i class="fas fa-pencil-alt"></i>
-                                </button>
-                                <!--red color for the delete button -->
-                                <button type="button" class="btn btn-outline-danger">
-                                    <!-- delete button -->
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                            <!-- card-body -->
-                            <div class="card-body">
-                                <!-- some image -->
-                                <!-- card-img-top -  places an image to the top of the card -->
-                                <!-- mb-3 - 3 margin from bottom -->
-                                <!-- rounded-lg - large border radius for image -->
-                                <img
-                                    width="100%"
-                                    src="#"
-                                    alt="Card image cap"
-                                    class="card-img-top mb-3 rounded-lg"
-                                >
-                                <h4 class="task__card__title">title</h4>
-                                <!-- text-muted - color of the text will be light grey -->
-                                <p class="description trim-3-lines text-muted" data-gramm_editor="false">
-                                    description
-                                </p>
-                                <!-- tags  -->
-                                <!-- text-white - white color text -->
-                                <!-- d-flex  -->
-                                <!-- flex-wrap - wrap the button -->
-                                <div class="tags text-white d-flex flex-wrap">
-                                    <!-- badge with blue color  -->
-                                    <!-- m-1 - one margin from all sides-->
-                                    <span class="badge bg-primary m-1">type</span>
-                                </div>
-                            </div>
-                            <div class="card-footer task__card__footer">
-                                <button
-                                    type="button"
-                                    class="btn btn-outline-primary float-right"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#showTask"
-                                    onclick="openTask.apply(this, arguments)"
-                                >
-                                    Open Task
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-        <script src="./scripts/index.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-    </body>
+            </div>
+        </section>
+
+        <section>
+            <div class="row task__container"></div>
+        </section>
+    </div>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+        crossorigin="anonymous"></script>
+
+    <!-- Our Js file -->
+    <script src="./scripts/index.js"></script>
+</body>
+
 </html>
