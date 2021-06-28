@@ -193,6 +193,12 @@ const saveEditChanges = (event) => {
         return task; // important
     });
     updateLocalStorage();
+
+    taskTitle.setAttribute("contenteditable", "false");
+    taskDescription.setAttribute("contenteditable", "false");
+    taskType.setAttribute("contenteditable", "false");
+    submitButton.removeAttribute("onClick");
+    submitButton.innerHTML = "Open Task";
 };
 
 // The modal was not closing upon adding new card
